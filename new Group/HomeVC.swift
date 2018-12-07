@@ -117,9 +117,23 @@ extension HomeVC {
             print(getLocal(key: .token))
 
         case 2:
-            NetWorkRequest(.verificationCodeForLogin(mobile: "13073731723", usageType: "SIGNIN_BY_MOBILE")) { (response) -> (Void) in
-                print(response)
+            let alert = UIAlertController.init(title: "提示", message: "请输入手机号码", preferredStyle: UIAlertController.Style.alert)
+            alert.addTextField { (textField) in
+                textField.placeholder = "请输入手机号码"
             }
+            let cancel = UIAlertAction.init(title: "取消", style: UIAlertAction.Style.cancel) { (action) in
+                print("取消")
+            }
+            let confirm = UIAlertAction.init(title: "确定", style: UIAlertAction.Style.default) { (action) in
+                NetWorkRequest(.verificationCodeForLogin(mobile: alert.textFields?.first?.text ?? "", usageType: "SIGNIN_BY_MOBILE")) { (response) -> (Void) in
+                    print(response)
+                }
+            }
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            
+            self.present(alert, animated: true, completion: nil)
+
         case 3:
             NetWorkRequest2(.getMe, completion: { (json) -> (Void) in
                 
