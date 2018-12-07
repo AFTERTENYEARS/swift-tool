@@ -12,8 +12,8 @@ import SwiftyJSON
 
 class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var me: MeModel?{
-        didSet{
+    var me: MeModel? {
+        didSet {
             self.nickName.title = self.me?.userName ?? "默认名称"
         }
     }
