@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 import SwiftyJSON
-import Moya
-import HandyJSON
 
 class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -35,7 +33,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return nickName
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(self.table)
@@ -51,7 +48,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         NetWorkRequest2(.getMe, completion: { (json) -> (Void) in
             
             print(json)
-            
             self.me = codableFromJSON(json: json, codable: MeModel.self)
             
         }) { (error) -> (Void) in
@@ -59,7 +55,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
 
 
 extension HomeVC {
