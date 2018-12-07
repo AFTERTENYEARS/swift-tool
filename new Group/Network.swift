@@ -104,9 +104,9 @@ private let networkPlugin = NetworkActivityPlugin.init { (changeType, targetType
 
 let Provider = MoyaProvider<API>(endpointClosure: myEndpointClosure, requestClosure: requestClosure, plugins: [networkPlugin], trackInflights: false)
 
-///先添加一个闭包用于成功时后台返回数据的回调
+//先添加一个闭包用于成功时后台返回数据的回调
 typealias successCallback = ((String) -> (Void))
-///再次用一个方法封装provider.request()
+//再次用一个方法封装provider.request()
 func NetWorkRequest(_ target: API, completion: @escaping successCallback ){
     //先判断网络是否有链接 没有的话直接返回--代码略
     

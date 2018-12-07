@@ -10,13 +10,12 @@ import Foundation
 import Moya
 
 enum API {
-    
-    case pathDefault
-    
     case verificationCodeForLogin(mobile: String, usageType: String)
     case loginMobile(mobile: String, verificationCode: String, imei: String)
     case getMe
     case page(offset: Int, limit: Int)
+    
+    case pathDefault
 }
 
 extension API:TargetType{
@@ -28,9 +27,6 @@ extension API:TargetType{
     //不同接口的路径字段
     var path: String {
         switch self {
-        case .pathDefault:
-            return "pathDefault"
-            
         case .verificationCodeForLogin:
             return "/api/common/verificationCode"
         case .loginMobile:
@@ -39,14 +35,14 @@ extension API:TargetType{
             return "/api/users/me"
         case .page(let offset, let limit):
             return "/page/\(offset)/\(limit)"
+        default:
+            return "pathDefault"
         }
     }
     
     // 请求方式 get post put delete
     var method: Moya.Method {
         switch self {
-        
-            
         case .verificationCodeForLogin:
             return .post
         case .loginMobile:
@@ -67,17 +63,13 @@ extension API:TargetType{
     //类似理解为AFN里的URLRequest
     var task: Task {
         switch self {
-        
-        case .pathDefault:
-            return .requestPlain
-            
         case .verificationCodeForLogin(let mobile, let usageType):
             return .requestParameters(parameters: ["mobile" : mobile, "usageType" : usageType], encoding: URLEncoding.default)
         case .loginMobile(let mobile, let verificationCode, let imei):
             return .requestParameters(parameters: ["mobile" : mobile, "verificationCode" : verificationCode, "imei" : imei], encoding: URLEncoding.default)
         case .getMe:
             return .requestPlain
-        case .page:
+        default:
             return .requestPlain
         }
     }
