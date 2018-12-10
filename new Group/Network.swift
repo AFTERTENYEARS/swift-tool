@@ -162,6 +162,7 @@ func NetWorkRequest2(_ target: API, completion: @escaping successCallback2, fail
                 case .loginMobile:
                     print(response.response?.allHeaderFields["x-user-token"] as! String)
                     setLocal(key: .token, value: response.response?.allHeaderFields["x-user-token"] as! String)
+                    completion(JSON())
                 default:
                     //这里转JSON用的swiftyJSON框架
                     let jsonData = try JSON(data: response.data)

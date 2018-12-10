@@ -94,14 +94,20 @@ extension HomeVC {
             
             let alert = UIAlertController.init(title: "提示", message: "请输入验证码", preferredStyle: UIAlertController.Style.alert)
             alert.addTextField { (textField) in
+                textField.placeholder = "请输入手机号"
+            }
+            alert.addTextField { (textField) in
                 textField.placeholder = "请输入验证码"
             }
             let cancel = UIAlertAction.init(title: "取消", style: UIAlertAction.Style.cancel) { (action) in
                 print("取消")
             }
             let confirm = UIAlertAction.init(title: "确定", style: UIAlertAction.Style.default) { (action) in
-                NetWorkRequest(.loginMobile(mobile: "13073731723", verificationCode: alert.textFields?.first?.text ?? "", imei: "10000")) { (response) -> (Void) in
-                }
+                NetWorkRequest2(.loginMobile(mobile: alert.textFields?.first?.text ?? "", verificationCode: alert.textFields?.last?.text ?? "", imei: "10000"), completion: { (json) -> (Void) in
+                    self.loadData()
+                }, failure: { (message) -> (Void) in
+                    
+                })
             }
             alert.addAction(cancel)
             alert.addAction(confirm)
@@ -109,7 +115,8 @@ extension HomeVC {
             self.present(alert, animated: true, completion: nil)
             
         case 1:
-            print(getLocal(key: .token))
+            setLocal(key: .token, value: "")
+            self.me = codableFromJSON(json: "{}", codable: MeModel.self)
 
         case 2:
             let alert = UIAlertController.init(title: "提示", message: "请输入手机号码", preferredStyle: UIAlertController.Style.alert)
@@ -162,27 +169,31 @@ struct MeModel : Codable {
 
 
 
-public func JSONFromData(data: Data) -> JSON {
-    return JSON(parseJSON: String(data: data, encoding: String.Encoding.utf8)!)
+public func JSONFromData(data: Data) -> JSON? {
+    return JSON(parseJSON: String(data: data, encoding: String.Encoding.utf8) ?? "{}")
 }
 
-public func dataFromJSON(json: JSON) -> Data {
-    return try! json.rawData()
+public func dataFromJSON(json: JSON) -> Data? {
+    if let data = try? json.rawData() { return data }
+    return nil
 }
 
-public func codableFromData<T: Codable>(data: Data, codable: T.Type) -> T {
-    return try! JSONDecoder().decode(codable, from: data)
+public func codableFromData<T: Codable>(data: Data, codable: T.Type) -> T? {
+    if let codable = try? JSONDecoder().decode(codable, from: data) { return codable }
+    return nil
 }
 
-public func dataFromCodable<T: Codable>(codable: T) -> Data {
-    return try! JSONEncoder().encode(codable)
+public func dataFromCodable<T: Codable>(codable: T) -> Data? {
+    if let data = try? JSONEncoder().encode(codable) { return data }
+    return nil
 }
 
-public func JSONFromCodable<T: Codable>(codable: T) -> JSON {
+public func JSONFromCodable<T: Codable>(codable: T) -> JSON? {
     if let data = try? JSONEncoder().encode(codable) { return JSONFromData(data: data) }
-    return "{}"
+    return nil
 }
 
-public func codableFromJSON<T: Codable>(json: JSON, codable: T.Type) -> T {
-    return try! JSONDecoder().decode(codable, from: json.rawData())
+public func codableFromJSON<T: Codable>(json: JSON, codable: T.Type) -> T? {
+    if let codable = try? JSONDecoder().decode(codable, from: json.rawData()) { return codable }
+    return nil
 }
