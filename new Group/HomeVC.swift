@@ -44,21 +44,20 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.didReceiveMemoryWarning()
     }
     
+}
+
+extension HomeVC {
+    
     private func loadData() {
         NetWorkRequest2(.getMe, completion: { (json) -> (Void) in
             
-            print(json)
             self.me = codableFromJSON(json: json, codable: MeModel.self)
-            
         }) { (error) -> (Void) in
             print(error)
         }
     }
-}
-
-
-extension HomeVC {
     
+    // MARK: 代理方法 - tableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -138,7 +137,7 @@ extension HomeVC {
 
         case 3:
             NetWorkRequest2(.getMe, completion: { (json) -> (Void) in
-                
+                print(json)
             }) { (error) -> (Void) in
                 
             }
@@ -197,3 +196,5 @@ public func codableFromJSON<T: Codable>(json: JSON, codable: T.Type) -> T? {
     if let codable = try? JSONDecoder().decode(codable, from: json.rawData()) { return codable }
     return nil
 }
+
+// MARK: model层

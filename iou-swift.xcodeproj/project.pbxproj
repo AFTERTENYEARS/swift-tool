@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A02D8BE21BE3E07005E6F61 /* UFresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A02D8BD21BE3E07005E6F61 /* UFresh.swift */; };
 		0AC73CFB21B8C787008E9BA5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC73CFA21B8C787008E9BA5 /* AppDelegate.swift */; };
 		0AC73D0221B8C78B008E9BA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AC73D0121B8C78B008E9BA5 /* Assets.xcassets */; };
 		0AC73D0521B8C78B008E9BA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AC73D0321B8C78B008E9BA5 /* LaunchScreen.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A02D8BD21BE3E07005E6F61 /* UFresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UFresh.swift; sourceTree = "<group>"; };
 		0AC73CF721B8C787008E9BA5 /* iou-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iou-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AC73CFA21B8C787008E9BA5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC73D0121B8C78B008E9BA5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				0AC73D0D21B8C920008E9BA5 /* SkDefine.swift */,
+				0A02D8BD21BE3E07005E6F61 /* UFresh.swift */,
 				0AC73D1921B91FA3008E9BA5 /* LocalData.swift */,
 				0AC73D1121B8CE6D008E9BA5 /* MoyaApi.swift */,
 				0AC73D1321B8CE82008E9BA5 /* Network.swift */,
@@ -265,6 +268,7 @@
 				0AC73D1221B8CE6D008E9BA5 /* MoyaApi.swift in Sources */,
 				0AC73D1021B8C9E6008E9BA5 /* HomeVC.swift in Sources */,
 				0AC73D1621B8CE91008E9BA5 /* MoyaConfig.swift in Sources */,
+				0A02D8BE21BE3E07005E6F61 /* UFresh.swift in Sources */,
 				0AC73D0E21B8C920008E9BA5 /* SkDefine.swift in Sources */,
 				0AC73CFB21B8C787008E9BA5 /* AppDelegate.swift in Sources */,
 				0AC73D1A21B91FA3008E9BA5 /* LocalData.swift in Sources */,
